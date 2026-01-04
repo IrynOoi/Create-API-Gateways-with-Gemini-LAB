@@ -1,0 +1,54 @@
+swagger: "2.0"
+info:
+  title: "Cymbal Superstore New Products API"
+  description: "API to fetch recently added products from the Cymbal Superstore inventory."
+  version: "1.0.0"
+produces:
+  - "application/json"
+paths:
+  /newproducts:
+    get:
+      summary: "Get Recent Products"
+      description: "Fetches a list of all products that have been added to the inventory within the last 7 days."
+      operationId: "getNewProducts"
+      x-google-backend:
+        address: https://us-central1-qwiklabs-gcp-01-c268144cf9cc.cloudfunctions.net/newproducts
+      responses:
+        "200":
+          description: "A successful response containing a list of new products."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        "500":
+          description: "Internal Server Error. The server was unable to process the request."
+definitions:
+  Product:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "The unique identifier for the product document in Firestore."
+      name:
+        type: "string"
+        description: "The name of the product, including the quantity in parentheses."
+        example: "Maple Almond Butter (42)"
+      price:
+        type: "number"
+        format: "float"
+        description: "The price of the product."
+      quantity:
+        type: "integer"
+        description: "The available quantity of the product."
+      imgfile:
+        type: "string"
+        description: "The path to the product's image file."
+        example: "product-images/maplealmondbutter.png"
+      timestamp:
+        type: "string"
+        format: "date-time"
+        description: "The timestamp when the product was added or last updated."
+      actualdateadded:
+        type: "string"
+        format: "date-time"
+        description: "The actual date the seeding function ran to add this product."

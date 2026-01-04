@@ -1,0 +1,15 @@
+{
+    "name": "newproducts",
+    "version": "1.0.0",
+    "description": "A Cloud Function that returns a list of products that were added within the last seven days.",
+    "main": "index.js",
+    "scripts": {
+      "test": "mocha test/*.test.js"
+    },
+    "author": "Google Cloud Platform",
+    "license": "Apache-2.0",
+    "dependencies": {
+      "@google-cloud/functions-framework": "^3.0.0",
+      "@google-cloud/firestore": "^6.0.0"
+    }
+  }
